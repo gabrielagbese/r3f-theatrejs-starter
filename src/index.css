@@ -1,0 +1,166 @@
+/**
+ * Global Styles and Tailwind CSS Configuration
+ * 
+ * This file contains:
+ * - Tailwind CSS v4 imports
+ * - Custom utility classes (glass morphism, section layouts)
+ * - CSS variable theme tokens
+ * - Scrollbar hiding utilities
+ */
+
+@import "tailwindcss";
+
+/* ============================================================================
+   GLOBAL STYLES
+   ============================================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+/* ============================================================================
+   GLASS MORPHISM UTILITY
+   Use: className="glass" for frosted glass effect
+   ============================================================================ */
+
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+/* ============================================================================
+   SCROLLBAR HIDING UTILITIES
+   Use: className="scrollbar-hidden" to hide but keep functionality
+   ============================================================================ */
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ============================================================================
+   SECTION WRAPPER STYLES
+   Standard layout for scroll sections
+   ============================================================================ */
+
+.section-wrapper {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: 100vh;
+  padding-block: 3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+/* Section header area */
+.section-top {
+  height: 10%;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Section content area */
+.section-bottom {
+  height: 30%;
+  width: 95.5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  .section-bottom {
+    width: 97%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-bottom {
+    width: 98%;
+  }
+}
+
+/* ============================================================================
+   THEME TOKENS (CSS Variables)
+   Customize these to match your brand colors
+   ============================================================================ */
+
+:root {
+  /* Radius */
+  --radius: 0.625rem;
+  
+  /* Light theme colors (default) */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.141 0.005 285.823);
+  --primary: oklch(0.21 0.006 285.885);
+  --primary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.967 0.001 286.375);
+  --muted-foreground: oklch(0.552 0.016 285.938);
+  --border: oklch(0.92 0.004 286.32);
+}
+
+.dark {
+  /* Dark theme colors */
+  --background: oklch(0.141 0.005 285.823);
+  --foreground: oklch(0.985 0 0);
+  --primary: oklch(0.92 0.004 286.32);
+  --primary-foreground: oklch(0.21 0.006 285.885);
+  --muted: oklch(0.274 0.006 286.033);
+  --muted-foreground: oklch(0.705 0.015 286.067);
+  --border: oklch(1 0 0 / 10%);
+}
+
+/* ============================================================================
+   THEME INLINE (Tailwind v4)
+   These make CSS variables available as Tailwind classes
+   ============================================================================ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+}
+
+/* ============================================================================
+   BASE LAYER
+   Global resets and defaults
+   ============================================================================ */
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+    outline-color: color-mix(in srgb, var(--color-border) 50%, transparent);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
+}

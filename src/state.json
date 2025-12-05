@@ -1,0 +1,225 @@
+{
+  "sheetsById": {
+    "Main Scene": {
+      "staticOverrides": {
+        "byObject": {
+          "Camera": {
+            "position": {
+              "x": 0,
+              "y": 5,
+              "z": 20
+            }
+          },
+          "Camera Target": {
+            "position": {
+              "x": 0,
+              "y": 2,
+              "z": 0
+            }
+          }
+        }
+      },
+      "sequence": {
+        "subUnitsPerUnit": 30,
+        "length": 10,
+        "type": "PositionalSequence",
+        "tracksByObject": {
+          "Camera": {
+            "trackData": {
+              "posX": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Camera:[\"position\",\"x\"]",
+                "keyframes": [
+                  {
+                    "id": "kf1",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 0
+                  },
+                  {
+                    "id": "kf2",
+                    "position": 5,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 5
+                  },
+                  {
+                    "id": "kf3",
+                    "position": 10,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 0
+                  }
+                ]
+              },
+              "posY": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Camera:[\"position\",\"y\"]",
+                "keyframes": [
+                  {
+                    "id": "kf4",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 5
+                  },
+                  {
+                    "id": "kf5",
+                    "position": 3,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 8
+                  },
+                  {
+                    "id": "kf6",
+                    "position": 7,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 3
+                  },
+                  {
+                    "id": "kf7",
+                    "position": 10,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 5
+                  }
+                ]
+              },
+              "posZ": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Camera:[\"position\",\"z\"]",
+                "keyframes": [
+                  {
+                    "id": "kf8",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 20
+                  },
+                  {
+                    "id": "kf9",
+                    "position": 5,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 10
+                  },
+                  {
+                    "id": "kf10",
+                    "position": 10,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 5
+                  }
+                ]
+              }
+            },
+            "trackIdByPropPath": {
+              "[\"position\",\"x\"]": "posX",
+              "[\"position\",\"y\"]": "posY",
+              "[\"position\",\"z\"]": "posZ"
+            }
+          },
+          "Camera Target": {
+            "trackData": {
+              "targetX": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Camera Target:[\"position\",\"x\"]",
+                "keyframes": [
+                  {
+                    "id": "kf11",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 0
+                  },
+                  {
+                    "id": "kf12",
+                    "position": 10,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 0
+                  }
+                ]
+              },
+              "targetY": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Camera Target:[\"position\",\"y\"]",
+                "keyframes": [
+                  {
+                    "id": "kf13",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 2
+                  },
+                  {
+                    "id": "kf14",
+                    "position": 5,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 0
+                  },
+                  {
+                    "id": "kf15",
+                    "position": 10,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 2
+                  }
+                ]
+              },
+              "targetZ": {
+                "type": "BasicKeyframedTrack",
+                "__debugName": "Camera Target:[\"position\",\"z\"]",
+                "keyframes": [
+                  {
+                    "id": "kf16",
+                    "position": 0,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 0
+                  },
+                  {
+                    "id": "kf17",
+                    "position": 10,
+                    "connectedRight": true,
+                    "handles": [0.5, 1, 0.5, 0],
+                    "type": "bezier",
+                    "value": 0
+                  }
+                ]
+              }
+            },
+            "trackIdByPropPath": {
+              "[\"position\",\"x\"]": "targetX",
+              "[\"position\",\"y\"]": "targetY",
+              "[\"position\",\"z\"]": "targetZ"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitionVersion": "0.4.0",
+  "revisionHistory": [
+    "initial-state"
+  ]
+}
