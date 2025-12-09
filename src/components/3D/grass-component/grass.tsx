@@ -285,6 +285,10 @@ const vertexShader = `
   varying vec3 vNormal;
   varying vec3 vWorldPosition;
   
+  // Include shadow map pars for receiving shadows
+  #include <common>
+  #include <shadowmap_pars_vertex>
+  
   // Simplex noise for turbulence
   vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
   vec4 mod289(vec4 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -374,6 +378,12 @@ const vertexShader = `
     gl_Position = projectionMatrix * mvPosition;
     
     vNormal = normalMatrix * mat3(instanceMatrix) * normal;
+    
+    // Shadow coordinates - compute world position after wind displacement
+    vec4 worldPosition = modelMatrix * instanceMatrix * vec4(pos, 1.0);
+    // transformedNormal is required by shadowmap_vertex
+    vec3 transformedNormal = normalMatrix * mat3(instanceMatrix) * normal;
+    #include <shadowmap_vertex>
   }
 `
 
@@ -386,6 +396,12 @@ const fragmentShader = `
   varying vec3 vNormal;
   varying vec3 vWorldPosition;
   
+  // Include shadow map pars for receiving shadows
+  #include <common>
+  #include <packing>
+  #include <lights_pars_begin>
+  #include <shadowmap_pars_fragment>
+  
   void main() {
     // Gradient from base to tip
     vec3 color = mix(uBaseColor, uTipColor, vHeight);
@@ -394,6 +410,20 @@ const fragmentShader = `
     vec3 lightDir = normalize(vec3(0.5, 1.0, 0.3));
     float diff = max(dot(normalize(vNormal), lightDir), 0.0);
     color *= 0.6 + diff * 0.4;
+    
+    // Apply shadow
+    #if defined( USE_SHADOWMAP ) && ( NUM_DIR_LIGHT_SHADOWS > 0 )
+      DirectionalLightShadow directionalShadow = directionalLightShadows[0];
+      float shadow = getShadow(
+        directionalShadowMap[0],
+        directionalShadow.shadowMapSize,
+        directionalShadow.shadowIntensity,
+        directionalShadow.shadowBias,
+        directionalShadow.shadowRadius,
+        vDirectionalShadowCoord[0]
+      );
+      color *= 0.3 + shadow * 0.7; // Darken shadowed areas
+    #endif
     
     gl_FragColor = vec4(color, 1.0);
   }
@@ -503,22 +533,27 @@ const Grass = memo(function Grass({
 
   // Create shader material
   const material = useMemo(() => {
-    return new THREE.ShaderMaterial({
-      uniforms: {
-        uTime: { value: 0 },
-        uWindStrength: { value: windConfig.strength },
-        uWindSpeed: { value: windConfig.speed },
-        uWindDirection: { value: windDirection },
-        uTurbulence: { value: windConfig.turbulence },
-        uGustFrequency: { value: windConfig.gustFrequency },
-        uGustStrength: { value: windConfig.gustStrength },
-        uBaseColor: { value: new THREE.Color(baseColor) },
-        uTipColor: { value: new THREE.Color(tipColor) },
-      },
+    const mat = new THREE.ShaderMaterial({
+      uniforms: THREE.UniformsUtils.merge([
+        THREE.UniformsLib.lights,
+        {
+          uTime: { value: 0 },
+          uWindStrength: { value: windConfig.strength },
+          uWindSpeed: { value: windConfig.speed },
+          uWindDirection: { value: windDirection },
+          uTurbulence: { value: windConfig.turbulence },
+          uGustFrequency: { value: windConfig.gustFrequency },
+          uGustStrength: { value: windConfig.gustStrength },
+          uBaseColor: { value: new THREE.Color(baseColor) },
+          uTipColor: { value: new THREE.Color(tipColor) },
+        },
+      ]),
       vertexShader,
       fragmentShader,
       side: THREE.DoubleSide,
+      lights: true, // Enable light uniforms for shadow support
     })
+    return mat
   }, [windConfig, windDirection, baseColor, tipColor])
 
   // Update instance matrices on mount

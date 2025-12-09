@@ -199,10 +199,10 @@ export function Experience({ orbitMode }: ExperienceProps) {
             {/* ---------------------------------------------------------------- */}
             
             <Grass
-                size={[80, 80]}
-                bladeCount={100000}
+                size={[30, 30]}
+                bladeCount={400000}
                 position={[0, 0, 0]}
-                bladeWidth={0.1}
+                bladeWidth={0.12}
                 terrainColor="#2a3d21"
                 baseColor="#6B9B37"
                 tipColor="#9bd432"
@@ -216,7 +216,7 @@ export function Experience({ orbitMode }: ExperienceProps) {
                     gustStrength: 0.5,
                 }}
                 shadows={{
-                    castShadow: false,
+                    castShadow: true,
                     receiveShadow: true,
                     terrainReceiveShadow: true,
                 }}
